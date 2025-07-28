@@ -1,0 +1,26 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(ls:*)",
+      "Bash(find:*)",
+      "Bash(npm create:*)",
+      "Bash(npm install:*)",
+      "Bash(mv:*)",
+      "Bash(rmdir:*)",
+      "Bash(npm uninstall:*)",
+      "Bash(mkdir:*)",
+      "Bash(npm run dev:*)",
+      "Bash(test:*)",
+      "Bash(for dir in \"src/components/meeting\" \"src/components/libraries\" \"src/components/shared\" \"src/stores\" \"src/hooks\" \"src/services\" \"src/utils\")",
+      "Bash(do test -d \"$dir\")",
+      "Bash(echo \"✓ $dir exists\")",
+      "Bash(echo:*)",
+      "Bash(done)",
+      "Bash(npm run build:*)",
+      "Bash(npx supabase:*)",
+      "Bash(psql:*)",
+      "Bash(rm:*)"
+    ],
+    "deny": []
+  }
+}
