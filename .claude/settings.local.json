@@ -19,7 +19,8 @@
       "Bash(npm run build:*)",
       "Bash(npx supabase:*)",
       "Bash(psql:*)",
-      "Bash(rm:*)"
+      "Bash(rm:*)",
+      "Bash(git add:*)"
     ],
     "deny": []
   }

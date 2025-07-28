@@ -20,36 +20,29 @@ export interface Prompt {
   isActive: boolean
 }
 
-export interface Card {
-  id: string
-  title: string
-  description?: string
-  category?: string
-  isDefault: boolean
-  isActive: boolean
-}
-
 export interface Meeting {
   id: string
   coupleId: string
   startedAt: Date
   completedAt?: Date
-  mood1?: number
-  mood2?: number
-  notes1?: string
-  notes2?: string
   promptId?: string
-  cardIds: string[]
-  gratitude1?: string
-  gratitude2?: string
-  actionItems?: string[]
+  topicOrder: string[] // Ordered list of topic IDs
+  currentTopicIndex?: number
 }
 
-export interface MeetingItem {
+export interface TopicResponse {
   id: string
   meetingId: string
-  cardId: string
-  status: 'pending' | 'discussed' | 'actionItem' | 'skipped'
+  topicId: string
   notes?: string
-  order: number
+  checkedPoints?: string[] // IDs of checked discussion points
+  // For check-in topic specifically
+  mood1?: number
+  mood2?: number
+  checkInNotes1?: string
+  checkInNotes2?: string
+  // For wrap-up topic
+  keyTakeaways?: string[]
+  gratitude1?: string
+  gratitude2?: string
 }

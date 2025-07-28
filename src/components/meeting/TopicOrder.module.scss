@@ -1,0 +1,117 @@
+.page {
+  padding: var(--space-lg);
+  max-width: 430px;
+  margin: 0 auto;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: var(--space-xl);
+}
+
+.title {
+  font-size: var(--font-size-2xl);
+  color: var(--text-primary);
+  margin-bottom: var(--space-sm);
+}
+
+.subtitle {
+  font-size: var(--font-size-base);
+  color: var(--text-secondary);
+}
+
+.topicList {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+  margin-bottom: var(--space-xl);
+}
+
+.topicCard {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  padding: var(--space-md);
+  background-color: var(--surface);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  position: relative;
+  transition: transform 0.2s ease;
+  
+  &.shuffled {
+    background-color: var(--yellow-light);
+  }
+  
+  &.fixed {
+    background-color: var(--teal-light);
+  }
+}
+
+.topicNumber {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--white);
+  border-radius: var(--radius-full);
+  font-weight: 600;
+  font-size: var(--font-size-lg);
+  color: var(--text-primary);
+  flex-shrink: 0;
+}
+
+.topicContent {
+  flex: 1;
+}
+
+.topicTitle {
+  font-size: var(--font-size-base);
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: var(--space-xs);
+}
+
+.topicPoints {
+  font-size: var(--font-size-sm);
+  color: var(--text-secondary);
+}
+
+.badge {
+  position: absolute;
+  top: var(--space-sm);
+  right: var(--space-sm);
+  font-size: var(--font-size-xs);
+  font-weight: 500;
+  padding: 2px var(--space-xs);
+  background-color: var(--white);
+  border-radius: var(--radius-sm);
+  color: var(--text-secondary);
+}
+
+.info {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  justify-content: center;
+  color: var(--text-secondary);
+  font-size: var(--font-size-sm);
+  margin-bottom: var(--space-xl);
+  
+  svg {
+    color: var(--teal);
+  }
+}
+
+.actions {
+  button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-sm);
+  }
+}

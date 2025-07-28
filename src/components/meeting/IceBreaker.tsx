@@ -1,66 +1,47 @@
-import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-import { RefreshCw, Check } from "lucide-react";
-import { useContentStore } from "@/stores/contentStore";
-import { useMeetingStore } from "@/stores/meetingStore";
-import { Button } from "@/components/ui/button";
-import type { Prompt } from "@/types";
-import styles from "./IceBreaker.module.scss";
+import { useState, useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
+import { RefreshCw } from 'lucide-react'
+import { useContentStore } from '@/stores/contentStore'
+import { useMeetingStore } from '@/stores/meetingStore'
+import { Button } from '@/components/ui/button'
+import type { Prompt } from '@/types'
+import styles from './IceBreaker.module.scss'
 
 export function IceBreaker() {
-  const navigate = useNavigate();
-  const { getActivePrompts } = useContentStore();
-  const { setCurrentMeeting, addMeeting } = useMeetingStore();
-  const [currentPrompt, setCurrentPrompt] = useState<Prompt | null>(null);
-  const [usedPromptIds, setUsedPromptIds] = useState<string[]>([]);
+  const navigate = useNavigate()
+  const { getActivePrompts } = useContentStore()
+  const { createMeeting } = useMeetingStore()
+  const [currentPrompt, setCurrentPrompt] = useState<Prompt | null>(null)
+  const [usedPromptIds, setUsedPromptIds] = useState<string[]>([])
 
   const selectRandomPrompt = () => {
-    const activePrompts = getActivePrompts();
-    const availablePrompts = activePrompts.filter(
-      (p) => !usedPromptIds.includes(p.id),
-    );
-
+    const activePrompts = getActivePrompts()
+    const availablePrompts = activePrompts.filter(p => !usedPromptIds.includes(p.id))
+    
     if (availablePrompts.length === 0) {
       // Reset if all prompts have been used
-      setUsedPromptIds([]);
-      const randomIndex = Math.floor(Math.random() * activePrompts.length);
-      setCurrentPrompt(activePrompts[randomIndex]);
-      setUsedPromptIds([activePrompts[randomIndex].id]);
+      setUsedPromptIds([])
+      const randomIndex = Math.floor(Math.random() * activePrompts.length)
+      setCurrentPrompt(activePrompts[randomIndex])
+      setUsedPromptIds([activePrompts[randomIndex].id])
     } else {
-      const randomIndex = Math.floor(Math.random() * availablePrompts.length);
-      setCurrentPrompt(availablePrompts[randomIndex]);
-      setUsedPromptIds([...usedPromptIds, availablePrompts[randomIndex].id]);
+      const randomIndex = Math.floor(Math.random() * availablePrompts.length)
+      setCurrentPrompt(availablePrompts[randomIndex])
+      setUsedPromptIds([...usedPromptIds, availablePrompts[randomIndex].id])
     }
-  };
+  }
 
   useEffect(() => {
-    selectRandomPrompt();
-
-    // Create new meeting
-    const meeting = {
-      id: `meeting-${Date.now()}`,
-      coupleId: "default-couple",
-      startedAt: new Date(),
-      cardIds: [],
-    };
-    addMeeting(meeting);
-    setCurrentMeeting(meeting);
-  }, []);
+    selectRandomPrompt()
+  }, [])
 
   const handleContinue = () => {
-    if (currentPrompt) {
-      setCurrentMeeting({
-        id: `meeting-${Date.now()}`,
-        coupleId: "default-couple",
-        startedAt: new Date(),
-        promptId: currentPrompt.id,
-        cardIds: [],
-      });
-    }
-    navigate("/meeting/check-in");
-  };
+    // Create new meeting with the prompt
+    createMeeting(currentPrompt?.id)
+    navigate('/meeting/topic-order')
+  }
 
-  if (!currentPrompt) return null;
+  if (!currentPrompt) return null
 
   return (
     <div className={styles.page}>
@@ -76,6 +57,7 @@ export function IceBreaker() {
         )}
       </div>
 
+
       <div className={styles.actions}>
         <Button
           variant="ghost"
@@ -86,10 +68,15 @@ export function IceBreaker() {
           Different Prompt
         </Button>
 
-        <Button variant="primary" size="lg" fullWidth onClick={handleContinue}>
-          Done. Continue to Check-in
+        <Button
+          variant="primary"
+          size="lg"
+          fullWidth
+          onClick={handleContinue}
+        >
+          Continue to Topics
         </Button>
       </div>
     </div>
-  );
+  )
 }

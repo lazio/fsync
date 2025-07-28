@@ -1,4 +1,4 @@
-import type { Prompt, Card } from '@/types'
+import type { Prompt } from '@/types'
 
 export const defaultPrompts: Prompt[] = [
   // Connection & Intimacy
@@ -42,76 +42,4 @@ export const defaultPrompts: Prompt[] = [
   { id: 'p28', text: "What's a tradition we've accidentally created?", category: 'memories', isDefault: true, isActive: true },
   { id: 'p29', text: "Describe our first date from your partner's perspective", category: 'memories', isDefault: true, isActive: true },
   { id: 'p30', text: "What's a small detail from early in our relationship you still remember?", category: 'memories', isDefault: true, isActive: true },
-  
-  // Support & Care
-  { id: 'p31', text: "How can I best support you this coming week?", category: 'support', isDefault: true, isActive: true },
-  { id: 'p32', text: "What's weighing on your mind that you haven't shared yet?", category: 'support', isDefault: true, isActive: true },
-  { id: 'p33', text: "What kind of comfort do you need when you're stressed?", category: 'support', isDefault: true, isActive: true },
-  { id: 'p34', text: "Share a recent win you haven't celebrated yet", category: 'support', isDefault: true, isActive: true },
-  { id: 'p35', text: "What's one way I've made you feel loved this week?", category: 'support', isDefault: true, isActive: true },
-  
-  // Creativity & Fun
-  { id: 'p36', text: "Invent a holiday just for us - what would we celebrate?", category: 'creative', isDefault: true, isActive: true },
-  { id: 'p37', text: "If we wrote a children's book together, what would it be about?", category: 'creative', isDefault: true, isActive: true },
-  { id: 'p38', text: "Design our dream date using only things we already have at home", category: 'creative', isDefault: true, isActive: true },
-  { id: 'p39', text: "What would our couple's theme song be?", category: 'creative', isDefault: true, isActive: true },
-  { id: 'p40', text: "If we had a food truck, what would we serve?", category: 'creative', isDefault: true, isActive: true },
-  
-  // Values & Meaning
-  { id: 'p41', text: "What value do we share that makes us stronger?", category: 'values', isDefault: true, isActive: true },
-  { id: 'p42', text: "How do we want people to describe our relationship?", category: 'values', isDefault: true, isActive: true },
-  { id: 'p43', text: "What legacy do we want to build together?", category: 'values', isDefault: true, isActive: true },
-  { id: 'p44', text: "What does 'home' mean to us?", category: 'values', isDefault: true, isActive: true },
-  { id: 'p45', text: "How have our priorities shifted since we met?", category: 'values', isDefault: true, isActive: true },
-  
-  // Seasonal
-  { id: 'p46', text: "What's your favorite season to spend with me and why?", category: 'seasonal', isDefault: true, isActive: true },
-  { id: 'p47', text: "Create a new tradition for the current season", category: 'seasonal', isDefault: true, isActive: true },
-  { id: 'p48', text: "What outdoor activity should we try together?", category: 'seasonal', isDefault: true, isActive: true },
-  { id: 'p49', text: "Plan a perfect day based on the current weather", category: 'seasonal', isDefault: true, isActive: true },
-  { id: 'p50', text: "What's a seasonal food that reminds you of us?", category: 'seasonal', isDefault: true, isActive: true },
-]
-
-export const defaultCards: Card[] = [
-  // Practical Matters
-  { id: 'c1', title: 'Budget Check-in', description: 'Review spending, savings goals, and financial priorities', category: 'practical', isDefault: true, isActive: true },
-  { id: 'c2', title: 'Household Tasks', description: 'Discuss chore distribution and home maintenance needs', category: 'practical', isDefault: true, isActive: true },
-  { id: 'c3', title: 'Calendar Sync', description: 'Align schedules, plan upcoming events and commitments', category: 'practical', isDefault: true, isActive: true },
-  { id: 'c4', title: 'Health & Wellness', description: 'Check in on physical and mental health, exercise, appointments', category: 'practical', isDefault: true, isActive: true },
-  { id: 'c5', title: 'Meal Planning', description: 'Plan weekly meals, grocery lists, and cooking responsibilities', category: 'practical', isDefault: true, isActive: true },
-  
-  // Relationship
-  { id: 'c6', title: 'Quality Time', description: 'Plan date nights, activities, and connection rituals', category: 'relationship', isDefault: true, isActive: true },
-  { id: 'c7', title: 'Intimacy Check', description: 'Discuss physical and emotional intimacy needs', category: 'relationship', isDefault: true, isActive: true },
-  { id: 'c8', title: 'Love Languages', description: 'Share how you prefer to give and receive love', category: 'relationship', isDefault: true, isActive: true },
-  { id: 'c9', title: 'Conflict Resolution', description: 'Address any unresolved tensions or recurring issues', category: 'relationship', isDefault: true, isActive: true },
-  { id: 'c10', title: 'Appreciation Practice', description: 'Share specific things you appreciate about each other', category: 'relationship', isDefault: true, isActive: true },
-  
-  // Family & Social
-  { id: 'c11', title: 'Family Dynamics', description: 'Discuss extended family relationships and boundaries', category: 'family', isDefault: true, isActive: true },
-  { id: 'c12', title: 'Parenting Alignment', description: 'Sync on parenting decisions and child-related topics', category: 'family', isDefault: true, isActive: true },
-  { id: 'c13', title: 'Social Calendar', description: 'Plan time with friends and social commitments', category: 'family', isDefault: true, isActive: true },
-  { id: 'c14', title: 'Pet Care', description: 'Discuss pet needs, vet visits, and care responsibilities', category: 'family', isDefault: true, isActive: true },
-  { id: 'c15', title: 'Holiday Planning', description: 'Coordinate holiday celebrations and family visits', category: 'family', isDefault: true, isActive: true },
-  
-  // Personal Growth
-  { id: 'c16', title: 'Individual Goals', description: "Support each other's personal aspirations and growth", category: 'growth', isDefault: true, isActive: true },
-  { id: 'c17', title: 'Career Development', description: 'Discuss work situations, career goals, and support needs', category: 'growth', isDefault: true, isActive: true },
-  { id: 'c18', title: 'Learning Together', description: 'Choose skills or topics to explore as a couple', category: 'growth', isDefault: true, isActive: true },
-  { id: 'c19', title: 'Habits & Routines', description: 'Review and adjust daily/weekly routines', category: 'growth', isDefault: true, isActive: true },
-  { id: 'c20', title: 'Mental Load', description: 'Discuss invisible labor and emotional responsibilities', category: 'growth', isDefault: true, isActive: true },
-  
-  // Fun & Adventure
-  { id: 'c21', title: 'Adventure Planning', description: 'Dream up and plan future trips or experiences', category: 'fun', isDefault: true, isActive: true },
-  { id: 'c22', title: 'Hobby Time', description: 'Share interests and plan activities together', category: 'fun', isDefault: true, isActive: true },
-  { id: 'c23', title: 'Entertainment', description: 'Choose shows, books, or games to enjoy together', category: 'fun', isDefault: true, isActive: true },
-  { id: 'c24', title: 'Spontaneity Check', description: 'Plan something unexpected or break routine', category: 'fun', isDefault: true, isActive: true },
-  { id: 'c25', title: 'Celebration Planning', description: 'Plan how to celebrate upcoming milestones', category: 'fun', isDefault: true, isActive: true },
-  
-  // Home & Environment
-  { id: 'c26', title: 'Home Projects', description: 'Plan improvements, decorating, or organizing projects', category: 'home', isDefault: true, isActive: true },
-  { id: 'c27', title: 'Space Needs', description: 'Discuss personal space and shared space needs', category: 'home', isDefault: true, isActive: true },
-  { id: 'c28', title: 'Sustainability', description: 'Review eco-friendly practices and goals', category: 'home', isDefault: true, isActive: true },
-  { id: 'c29', title: 'Emergency Planning', description: 'Update emergency contacts and preparedness plans', category: 'home', isDefault: true, isActive: true },
-  { id: 'c30', title: 'Digital Life', description: 'Organize shared digital accounts and data', category: 'home', isDefault: true, isActive: true },
 ]

@@ -1,14 +1,12 @@
 import { useNavigate } from 'react-router-dom'
 import { Heart, Calendar, TrendingUp } from 'lucide-react'
 import { useMeetingStore } from '@/stores/meetingStore'
-import { useCoupleStore } from '@/stores/coupleStore'
 import { Button } from '@/components/ui/button'
 import styles from './HomePage.module.scss'
 
 export function HomePage() {
   const navigate = useNavigate()
   const { meetings, getStreak } = useMeetingStore()
-  const { couple } = useCoupleStore()
   const streak = getStreak()
 
   const lastMeeting = meetings
@@ -22,9 +20,7 @@ export function HomePage() {
   return (
     <div className={styles.page}>
       <header className={styles.header}>
-        <h1 className={styles.title}>
-          {couple?.name || 'Weekly Parents Meeting'}
-        </h1>
+        <h1 className={styles.title}>Weekly Parents Meeting</h1>
         <p className={styles.subtitle}>Connect, plan, and grow together</p>
       </header>
 
@@ -63,16 +59,6 @@ export function HomePage() {
           <Heart size={20} />
           Start Meeting
         </Button>
-
-        {!couple && (
-          <Button
-            variant="secondary"
-            fullWidth
-            onClick={() => navigate('/settings')}
-          >
-            Set Up Your Couple Profile
-          </Button>
-        )}
       </div>
 
       {meetings.length > 0 && (
@@ -91,11 +77,6 @@ export function HomePage() {
                       month: 'short',
                       day: 'numeric'
                     })}
-                  </div>
-                  <div className={styles.meetingMood}>
-                    Mood: {meeting.mood1 && meeting.mood2 
-                      ? Math.round((meeting.mood1 + meeting.mood2) / 2) 
-                      : 'N/A'}/10
                   </div>
                 </div>
               ))}

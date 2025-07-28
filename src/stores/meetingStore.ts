@@ -1,16 +1,22 @@
 import { create } from 'zustand'
 import { persist } from 'zustand/middleware'
-import type { Meeting, MeetingItem } from '@/types'
+import type { Meeting, TopicResponse } from '@/types'
+import { getShuffledTopicOrder } from '@/data/topics'
 
 interface MeetingState {
   meetings: Meeting[]
   currentMeeting: Meeting | null
-  currentItems: MeetingItem[]
-  addMeeting: (meeting: Meeting) => void
+  topicResponses: TopicResponse[]
+  
+  createMeeting: (promptId?: string) => Meeting
   updateMeeting: (id: string, updates: Partial<Meeting>) => void
   setCurrentMeeting: (meeting: Meeting | null) => void
-  setCurrentItems: (items: MeetingItem[]) => void
-  updateItem: (id: string, updates: Partial<MeetingItem>) => void
+  
+  addTopicResponse: (response: TopicResponse) => void
+  updateTopicResponse: (id: string, updates: Partial<TopicResponse>) => void
+  getCurrentTopicResponse: (topicId: string) => TopicResponse | undefined
+  
+  advanceToNextTopic: () => void
   completeMeeting: () => void
   getStreak: () => number
 }
@@ -20,10 +26,24 @@ export const useMeetingStore = create<MeetingState>()(
     (set, get) => ({
       meetings: [],
       currentMeeting: null,
-      currentItems: [],
+      topicResponses: [],
       
-      addMeeting: (meeting) => 
-        set((state) => ({ meetings: [...state.meetings, meeting] })),
+      createMeeting: (promptId) => {
+        const meeting: Meeting = {
+          id: `meeting-${Date.now()}`,
+          coupleId: 'default-couple',
+          startedAt: new Date(),
+          promptId,
+          topicOrder: getShuffledTopicOrder(),
+          currentTopicIndex: 0
+        }
+        set((state) => ({
+          meetings: [...state.meetings, meeting],
+          currentMeeting: meeting,
+          topicResponses: [] // Clear responses for new meeting
+        }))
+        return meeting
+      },
       
       updateMeeting: (id, updates) =>
         set((state) => ({
@@ -38,14 +58,38 @@ export const useMeetingStore = create<MeetingState>()(
       
       setCurrentMeeting: (meeting) => set({ currentMeeting: meeting }),
       
-      setCurrentItems: (items) => set({ currentItems: items }),
-      
-      updateItem: (id, updates) =>
+      addTopicResponse: (response) =>
         set((state) => ({
-          currentItems: state.currentItems.map((item) =>
-            item.id === id ? { ...item, ...updates } : item
-          ),
+          topicResponses: [...state.topicResponses, response]
         })),
+      
+      updateTopicResponse: (id, updates) =>
+        set((state) => ({
+          topicResponses: state.topicResponses.map((r) =>
+            r.id === id ? { ...r, ...updates } : r
+          )
+        })),
+      
+      getCurrentTopicResponse: (topicId) => {
+        const { topicResponses, currentMeeting } = get()
+        if (!currentMeeting) return undefined
+        return topicResponses.find(
+          r => r.meetingId === currentMeeting.id && r.topicId === topicId
+        )
+      },
+      
+      advanceToNextTopic: () => {
+        const { currentMeeting } = get()
+        if (currentMeeting && currentMeeting.currentTopicIndex !== undefined) {
+          const nextIndex = currentMeeting.currentTopicIndex + 1
+          set((state) => ({
+            currentMeeting: {
+              ...state.currentMeeting!,
+              currentTopicIndex: nextIndex
+            }
+          }))
+        }
+      },
       
       completeMeeting: () => {
         const { currentMeeting } = get()
@@ -57,7 +101,7 @@ export const useMeetingStore = create<MeetingState>()(
                 : m
             ),
             currentMeeting: null,
-            currentItems: [],
+            topicResponses: []
           }))
         }
       },

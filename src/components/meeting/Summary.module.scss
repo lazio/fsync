@@ -91,6 +91,9 @@
 }
 
 .topic {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   padding-left: var(--space-md);
   position: relative;
   
@@ -109,10 +112,30 @@
   color: var(--text-primary);
 }
 
-.topicNotes {
+.pointsCount {
   font-size: var(--font-size-sm);
   color: var(--text-secondary);
-  margin: var(--space-xs) 0 0 0;
+}
+
+.takeaways {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+  
+  li {
+    padding-left: var(--space-md);
+    position: relative;
+    
+    &::before {
+      content: '•';
+      position: absolute;
+      left: 0;
+      color: var(--teal);
+    }
+  }
 }
 
 .gratitudes {
@@ -144,6 +167,10 @@
 
 .homeButton {
   background-color: var(--teal);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-sm);
   
   &:hover {
     background-color: var(--teal-dark);
