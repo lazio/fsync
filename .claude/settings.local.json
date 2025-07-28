@@ -20,7 +20,8 @@
       "Bash(npx supabase:*)",
       "Bash(psql:*)",
       "Bash(rm:*)",
-      "Bash(git add:*)"
+      "Bash(git add:*)",
+      "Bash(git commit:*)"
     ],
     "deny": []
   }
