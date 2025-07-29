@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { CheckSquare, Square } from 'lucide-react'
 import { useMeetingStore } from '@/stores/meetingStore'
+import { useSettingsStore } from '@/stores/settingsStore'
 import { topics } from '@/data/topics'
 import { Button } from '@/components/ui/button'
 import type { TopicResponse } from '@/types'
@@ -21,6 +22,7 @@ export function Topic({ topicId }: TopicProps) {
     advanceToNextTopic,
     completeMeeting 
   } = useMeetingStore()
+  const { partner1Name, partner2Name } = useSettingsStore()
   
   const topic = topics.find(t => t.id === topicId)
   const existingResponse = getCurrentTopicResponse(topicId)
@@ -106,7 +108,7 @@ export function Topic({ topicId }: TopicProps) {
         {topicId === 'check-in' ? (
           <div className={styles.checkInContent}>
             <div className={styles.partner}>
-              <h3>Partner 1</h3>
+              <h3>{partner1Name}</h3>
               <div className={styles.moodSection}>
                 <label>Mood (1-10)</label>
                 <input
@@ -128,7 +130,7 @@ export function Topic({ topicId }: TopicProps) {
             </div>
             
             <div className={styles.partner}>
-              <h3>Partner 2</h3>
+              <h3>{partner2Name}</h3>
               <div className={styles.moodSection}>
                 <label>Mood (1-10)</label>
                 <input
@@ -165,7 +167,7 @@ export function Topic({ topicId }: TopicProps) {
             <div className={styles.gratitudeSection}>
               <h3>Gratitude & Support</h3>
               <div className={styles.gratitudeItem}>
-                <label>Partner 1 → Partner 2</label>
+                <label>{partner1Name} → {partner2Name}</label>
                 <textarea
                   value={gratitude1}
                   onChange={(e) => setGratitude1(e.target.value)}
@@ -174,7 +176,7 @@ export function Topic({ topicId }: TopicProps) {
                 />
               </div>
               <div className={styles.gratitudeItem}>
-                <label>Partner 2 → Partner 1</label>
+                <label>{partner2Name} → {partner1Name}</label>
                 <textarea
                   value={gratitude2}
                   onChange={(e) => setGratitude2(e.target.value)}

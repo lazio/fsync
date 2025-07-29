@@ -2,6 +2,7 @@ import { useNavigate } from 'react-router-dom'
 import { CheckCircle, Home } from 'lucide-react'
 import { useMeetingStore } from '@/stores/meetingStore'
 import { useContentStore } from '@/stores/contentStore'
+import { useSettingsStore } from '@/stores/settingsStore'
 import { topics } from '@/data/topics'
 import { Button } from '@/components/ui/button'
 import styles from './Summary.module.scss'
@@ -10,6 +11,7 @@ export function Summary() {
   const navigate = useNavigate()
   const { meetings, topicResponses } = useMeetingStore()
   const { prompts } = useContentStore()
+  const { partner1Name, partner2Name } = useSettingsStore()
   
   // Get the most recent completed meeting
   const lastMeeting = meetings
@@ -103,13 +105,13 @@ export function Summary() {
             <div className={styles.gratitudes}>
               {wrapUpResponse.gratitude1 && (
                 <div className={styles.gratitudeItem}>
-                  <strong>Partner 1:</strong>
+                  <strong>{partner1Name}:</strong>
                   <p>{wrapUpResponse.gratitude1}</p>
                 </div>
               )}
               {wrapUpResponse.gratitude2 && (
                 <div className={styles.gratitudeItem}>
-                  <strong>Partner 2:</strong>
+                  <strong>{partner2Name}:</strong>
                   <p>{wrapUpResponse.gratitude2}</p>
                 </div>
               )}
