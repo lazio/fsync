@@ -1,6 +1,5 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { CheckSquare, Square } from 'lucide-react'
 import { useMeetingStore } from '@/stores/meetingStore'
 import { useSettingsStore } from '@/stores/settingsStore'
 import { topics } from '@/data/topics'
@@ -28,9 +27,6 @@ export function Topic({ topicId }: TopicProps) {
   const existingResponse = getCurrentTopicResponse(topicId)
   
   const [notes, setNotes] = useState(existingResponse?.notes || '')
-  const [checkedPoints, setCheckedPoints] = useState<string[]>(
-    existingResponse?.checkedPoints || []
-  )
   
   // Check-in specific state
   const [mood1, setMood1] = useState(existingResponse?.mood1 || 5)
@@ -45,21 +41,13 @@ export function Topic({ topicId }: TopicProps) {
   
   if (!topic || !currentMeeting) return null
   
-  const togglePoint = (pointId: string) => {
-    setCheckedPoints(prev => 
-      prev.includes(pointId) 
-        ? prev.filter(id => id !== pointId)
-        : [...prev, pointId]
-    )
-  }
   
   const handleContinue = () => {
     const response: TopicResponse = {
       id: existingResponse?.id || `response-${Date.now()}`,
       meetingId: currentMeeting.id,
       topicId,
-      notes,
-      checkedPoints
+      notes
     }
     
     // Add topic-specific data
@@ -188,21 +176,8 @@ export function Topic({ topicId }: TopicProps) {
           </div>
         ) : (
           <>
-            <div className={styles.points}>
-              {topic.points.map(point => (
-                <button
-                  key={point.id}
-                  className={styles.pointItem}
-                  onClick={() => togglePoint(point.id)}
-                >
-                  {checkedPoints.includes(point.id) ? (
-                    <CheckSquare size={20} className={styles.checkIcon} />
-                  ) : (
-                    <Square size={20} className={styles.checkIcon} />
-                  )}
-                  <span>{point.text}</span>
-                </button>
-              ))}
+            <div className={styles.description}>
+              <p>{topic.description}</p>
             </div>
             
             <div className={styles.notesSection}>

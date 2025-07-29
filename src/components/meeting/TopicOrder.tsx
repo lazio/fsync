@@ -44,8 +44,8 @@ export function TopicOrder() {
               <div className={styles.topicNumber}>{index + 1}</div>
               <div className={styles.topicContent}>
                 <h3 className={styles.topicTitle}>{topic.title}</h3>
-                <div className={styles.topicPoints}>
-                  {topic.points.length} discussion points
+                <div className={styles.topicDescription}>
+                  {topic.description.substring(0, 60)}...
                 </div>
               </div>
               {isFirst && <span className={styles.badge}>First</span>}

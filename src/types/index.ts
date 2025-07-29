@@ -35,7 +35,6 @@ export interface TopicResponse {
   meetingId: string
   topicId: string
   notes?: string
-  checkedPoints?: string[] // IDs of checked discussion points
   // For check-in topic specifically
   mood1?: number
   mood2?: number

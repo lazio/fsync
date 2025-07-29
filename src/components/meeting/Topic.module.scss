@@ -31,33 +31,16 @@
 }
 
 // Regular topic styles
-.points {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-sm);
-}
-
-.pointItem {
-  display: flex;
-  align-items: flex-start;
-  gap: var(--space-sm);
-  padding: var(--space-md);
+.description {
   background-color: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-md);
-  text-align: left;
-  cursor: pointer;
-  transition: all 0.2s ease;
+  border-radius: var(--radius-lg);
+  padding: var(--space-lg);
   
-  &:hover {
-    background-color: var(--gray-100);
+  p {
+    font-size: var(--font-size-base);
+    line-height: 1.6;
+    color: var(--text-primary);
   }
-}
-
-.checkIcon {
-  flex-shrink: 0;
-  margin-top: 2px;
-  color: var(--teal);
 }
 
 .notesSection {

@@ -77,9 +77,9 @@ export function Summary() {
               return (
                 <li key={topicId} className={styles.topic}>
                   <span className={styles.topicTitle}>{topic.title}</span>
-                  {response?.checkedPoints && response.checkedPoints.length > 0 && (
+                  {response?.notes && (
                     <span className={styles.pointsCount}>
-                      {response.checkedPoints.length} points discussed
+                      Notes added
                     </span>
                   )}
                 </li>
