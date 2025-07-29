@@ -1,0 +1,16 @@
+version: '3.8'
+
+services:
+  weekly-parents-meeting:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: weekly-parents-meeting
+    ports:
+      - "3000:80"
+    restart: unless-stopped
+    environment:
+      - NODE_ENV=production
+    labels:
+      - "com.weekly-parents-meeting.description=A mobile-first web app for couples' weekly meetings"
+      - "com.weekly-parents-meeting.version=1.0.0"
