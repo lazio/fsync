@@ -1,11 +1,19 @@
 import { useState } from 'react'
-import { Save, Users } from 'lucide-react'
+import { Save, Users, CheckSquare, Square } from 'lucide-react'
 import { useSettingsStore } from '@/stores/settingsStore'
+import { topics } from '@/data/topics'
 import { Button } from '@/components/ui/button'
 import styles from './SettingsPage.module.scss'
 
 export function SettingsPage() {
-  const { partner1Name, partner2Name, setPartner1Name, setPartner2Name } = useSettingsStore()
+  const { 
+    partner1Name, 
+    partner2Name, 
+    selectedTopics,
+    setPartner1Name, 
+    setPartner2Name,
+    toggleTopic 
+  } = useSettingsStore()
   const [name1, setName1] = useState(partner1Name)
   const [name2, setName2] = useState(partner2Name)
   const [saved, setSaved] = useState(false)
@@ -57,6 +65,41 @@ export function SettingsPage() {
               placeholder="Enter second partner's name"
               className={styles.input}
             />
+          </div>
+        </div>
+        
+        <div className={styles.section}>
+          <h2 className={styles.sectionTitle}>
+            <CheckSquare size={20} />
+            Meeting Topics
+          </h2>
+          <p className={styles.sectionDescription}>
+            Select which topics to include in your meetings (minimum 1 required)
+          </p>
+          <div className={styles.topicGrid}>
+            {topics
+              .filter(topic => !topic.isFixed)
+              .map(topic => (
+                <button
+                  key={topic.id}
+                  type="button"
+                  onClick={() => toggleTopic(topic.id)}
+                  className={`${styles.topicItem} ${selectedTopics.includes(topic.id) ? styles.selected : ''}`}
+                  disabled={selectedTopics.length === 1 && selectedTopics.includes(topic.id)}
+                >
+                  <div className={styles.topicCheck}>
+                    {selectedTopics.includes(topic.id) ? (
+                      <CheckSquare size={20} />
+                    ) : (
+                      <Square size={20} />
+                    )}
+                  </div>
+                  <div className={styles.topicContent}>
+                    <h3 className={styles.topicTitle}>{topic.title}</h3>
+                    <p className={styles.topicDescription}>{topic.description}</p>
+                  </div>
+                </button>
+              ))}
           </div>
         </div>
 

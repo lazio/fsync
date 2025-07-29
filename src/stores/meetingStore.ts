@@ -2,6 +2,7 @@ import { create } from 'zustand'
 import { persist } from 'zustand/middleware'
 import type { Meeting, TopicResponse } from '@/types'
 import { getShuffledTopicOrder } from '@/data/topics'
+import { useSettingsStore } from './settingsStore'
 
 interface MeetingState {
   meetings: Meeting[]
@@ -29,12 +30,13 @@ export const useMeetingStore = create<MeetingState>()(
       topicResponses: [],
       
       createMeeting: (promptId) => {
+        const selectedTopics = useSettingsStore.getState().selectedTopics
         const meeting: Meeting = {
           id: `meeting-${Date.now()}`,
           coupleId: 'default-couple',
           startedAt: new Date(),
           promptId,
-          topicOrder: getShuffledTopicOrder(),
+          topicOrder: getShuffledTopicOrder(selectedTopics),
           currentTopicIndex: 0
         }
         set((state) => ({
