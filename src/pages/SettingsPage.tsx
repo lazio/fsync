@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Save, Users, CheckSquare, Square } from 'lucide-react'
+import { Save, Users, CheckSquare, Square, Shuffle } from 'lucide-react'
 import { useSettingsStore } from '@/stores/settingsStore'
 import { topics } from '@/data/topics'
 import { Button } from '@/components/ui/button'
@@ -10,9 +10,11 @@ export function SettingsPage() {
     partner1Name, 
     partner2Name, 
     selectedTopics,
+    shuffleTopics,
     setPartner1Name, 
     setPartner2Name,
-    toggleTopic 
+    toggleTopic,
+    setShuffleTopics
   } = useSettingsStore()
   const [name1, setName1] = useState(partner1Name)
   const [name2, setName2] = useState(partner2Name)
@@ -100,6 +102,31 @@ export function SettingsPage() {
                   </div>
                 </button>
               ))}
+          </div>
+          
+          <div className={styles.shuffleToggle}>
+            <button
+              type="button"
+              onClick={() => setShuffleTopics(!shuffleTopics)}
+              className={styles.toggleButton}
+            >
+              <div className={styles.toggleIcon}>
+                <Shuffle size={20} />
+              </div>
+              <div className={styles.toggleContent}>
+                <h3 className={styles.toggleTitle}>Shuffle Topics</h3>
+                <p className={styles.toggleDescription}>
+                  {shuffleTopics 
+                    ? 'Topics will appear in random order each meeting' 
+                    : 'Topics will appear in the same order each meeting'}
+                </p>
+              </div>
+              <div className={styles.toggleSwitch}>
+                <div className={`${styles.switch} ${shuffleTopics ? styles.active : ''}`}>
+                  <div className={styles.switchHandle} />
+                </div>
+              </div>
+            </button>
           </div>
         </div>
 

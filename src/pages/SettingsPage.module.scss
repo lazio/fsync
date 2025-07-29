@@ -164,3 +164,81 @@
   color: var(--text-secondary);
   line-height: 1.4;
 }
+
+.shuffleToggle {
+  margin-top: var(--space-lg);
+}
+
+.toggleButton {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  width: 100%;
+  padding: var(--space-md);
+  background-color: var(--background);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  text-align: left;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  
+  &:hover {
+    background-color: var(--gray-50);
+    border-color: var(--lilac);
+  }
+}
+
+.toggleIcon {
+  flex-shrink: 0;
+  color: var(--lilac);
+}
+
+.toggleContent {
+  flex: 1;
+}
+
+.toggleTitle {
+  font-size: var(--font-size-base);
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: var(--space-xs);
+}
+
+.toggleDescription {
+  font-size: var(--font-size-sm);
+  color: var(--text-secondary);
+  line-height: 1.4;
+}
+
+.toggleSwitch {
+  flex-shrink: 0;
+}
+
+.switch {
+  width: 48px;
+  height: 24px;
+  background-color: var(--gray-300);
+  border-radius: 12px;
+  position: relative;
+  transition: background-color 0.2s ease;
+  
+  &.active {
+    background-color: var(--lilac);
+  }
+}
+
+.switchHandle {
+  width: 20px;
+  height: 20px;
+  background-color: white;
+  border-radius: 50%;
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  transition: transform 0.2s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  
+  .active & {
+    transform: translateX(24px);
+  }
+}

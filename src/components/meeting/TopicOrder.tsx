@@ -57,7 +57,7 @@ export function TopicOrder() {
       
       <div className={styles.info}>
         <CheckCircle size={16} />
-        <p>The middle topics were shuffled randomly!</p>
+        <p>Topics are ready for your meeting!</p>
       </div>
       
       <div className={styles.actions}>

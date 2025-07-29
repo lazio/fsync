@@ -115,7 +115,7 @@ export const defaultSelectedTopics = [
   'relationship-growth'
 ]
 
-export function getShuffledTopicOrder(selectedTopicIds?: string[]): string[] {
+export function getTopicOrder(selectedTopicIds?: string[], shouldShuffle: boolean = true): string[] {
   // Get fixed topics
   const checkIn = topics.find(t => t.id === 'check-in')!
   const wrapUp = topics.find(t => t.id === 'wrap-up')!
@@ -126,17 +126,20 @@ export function getShuffledTopicOrder(selectedTopicIds?: string[]): string[] {
     ? availableTopics.filter(t => selectedTopicIds.includes(t.id))
     : availableTopics.filter(t => defaultSelectedTopics.includes(t.id))
   
-  // Shuffle selected topics
-  const shuffled = [...selectedTopics]
-  for (let i = shuffled.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1))
-    ;[shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]]
+  // Shuffle selected topics if needed
+  let orderedTopics = [...selectedTopics]
+  
+  if (shouldShuffle) {
+    for (let i = orderedTopics.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1))
+      ;[orderedTopics[i], orderedTopics[j]] = [orderedTopics[j], orderedTopics[i]]
+    }
   }
   
   // Return ordered topic IDs
   return [
     checkIn.id,
-    ...shuffled.map(t => t.id),
+    ...orderedTopics.map(t => t.id),
     wrapUp.id
   ]
 }
